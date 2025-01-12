@@ -13,9 +13,9 @@
 
         <x-forms.divider />
 
-        <x-forms.input label="Employer Name" name="employer" placeholder="Please enter your employer name" />
+        <x-forms.input label="Company Name" name="company" placeholder="Please enter your company name" />
 
-        <x-forms.input label="Employer Logo" name="logo" type="file" />
+        <x-forms.input label="Company Logo" name="logo" type="file" />
 
         <x-forms.button>Register</x-forms.button>
     </x-forms.form>

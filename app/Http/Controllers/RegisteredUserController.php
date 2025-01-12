@@ -54,12 +54,13 @@ class RegisteredUserController extends Controller
             ],
         ]);
 
-        $employerAttributes = $request->validate([
-            'employer' => [
+        $companyAttributes = $request->validate([
+            'company' => [
                 'required',
                 'string',
                 'min:2',
-                'max:64'
+                'max:64',
+                'unique:companies,name'
             ],
             'logo' => [
                 'required',
@@ -72,8 +73,8 @@ class RegisteredUserController extends Controller
 
         $logoPath = $request->logo->store('logos');
 
-        $user->employer()->create([
-            'name' => $employerAttributes['employer'],
+        $user->company()->create([
+            'name' => $companyAttributes['company'],
             'logo' => $logoPath
         ]);
 

@@ -2,12 +2,12 @@
 
 <x-card class="flex gap-x-6">
     <div>
-        <x-employer-logo :employer="$job->employer" />
+        <x-company-logo :company="$job->company" />
     </div>
 
     <div class="flex flex-col flex-1">
         <a href="#" class="text-md text-gray-400">
-            {{ $job->employer->name }}
+            {{ $job->company->name }}
         </a>
 
         <h3 class="font-bold text-xl mt-3 group-hover:text-blue-600 transition-colors duration-300">
@@ -27,7 +27,7 @@
                 {{ $job->location }}
             </span>
             <span
-                class="bg-white text-black text-xs rounded-lg p-1 italic group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                class="bg-white text-black text-xs rounded-lg p-1 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                 {{ $job->created_at->diffForHumans() }}
             </span>
         </div>

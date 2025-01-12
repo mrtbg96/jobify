@@ -3,11 +3,11 @@
 <x-card>
     <div class="flex justify-between items-center text-md font-bold">
         <div>
-            {{ $job->employer->name }}
+            {{ $job->company->name }}
         </div>
         <div>
             <span
-                class="bg-white text-black text-sm rounded-lg p-1 italic group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                class="bg-white text-black text-sm rounded-lg p-1 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                 {{ $job->created_at->diffForHumans() }}
             </span>
         </div>
@@ -34,6 +34,6 @@
             @endforeach
         </div>
 
-        <x-employer-logo :employer="$job->employer" :width="48" />
+        <x-company-logo :company="$job->company" :width="48" />
     </div>
 </x-card>

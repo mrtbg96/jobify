@@ -18,7 +18,7 @@ class SearchController extends Controller
         ]);
 
         $jobs = Job::query()
-            ->with(['employer', 'tags'])
+            ->with(['company', 'tags'])
             ->where('title', 'LIKE', '%' . $request->search . '%')
             ->orWhere('location', 'LIKE', '%' . $request->search . '%')
             ->orWhere('schedule', 'LIKE', '%' . $request->search . '%')

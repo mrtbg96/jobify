@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
 use App\Http\Requests\StoreJobRequest;
-use App\Http\Requests\UpdateJobRequest;
 
 class JobController extends Controller
 {
@@ -24,13 +23,13 @@ class JobController extends Controller
     public function index(): View
     {
         $featuredJobs = Job::query()
-            ->with(['employer', 'tags'])
+            ->with(['company', 'tags'])
             ->where('featured', true)
             ->latest()
             ->get();
 
         $jobs = Job::query()
-            ->with(['employer', 'tags'])
+            ->with(['company', 'tags'])
             ->latest()
             ->get();
 
@@ -84,47 +83,14 @@ class JobController extends Controller
             ],
         ]);
 
-
         $attributes['featured'] = $request->has('featured');
 
-        $job = Auth::user()->employer->jobs()->create(Arr::except($attributes, 'tags'));
+        $job = Auth::user()->company->jobs()->create(Arr::except($attributes, 'tags'));
 
         foreach (explode(',', $attributes['tags']) as $tag) {
             $job->tag(strtolower(trim($tag)));
         }
 
         return redirect()->route('jobs.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Job $job)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Job $job)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateJobRequest $request, Job $job)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Job $job)
-    {
-        //
     }
 }

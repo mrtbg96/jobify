@@ -1,17 +1,17 @@
 <?php
 
 use App\Models\Job;
-use App\Models\Employer;
+use App\Models\Company;
 
-it('belongs to an employer', function () {
+it('belongs to a company', function () {
     // Arrange
-    $employer = Employer::factory()->create();
+    $company = Company::factory()->create();
     $job = Job::factory()->create([
-        'employer_id' => $employer->id,
+        'company_id' => $company->id,
     ]);
 
     // Act & Assert
-    expect($job->employer->is($employer))->toBeTrue();
+    expect($job->company->is($company))->toBeTrue();
 });
 
 it('can have tags',  function () {

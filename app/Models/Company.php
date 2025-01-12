@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Employer extends Model
+class Company extends Model
 {
-    /** @use HasFactory<\Database\Factories\EmployerFactory> */
+    /** @use HasFactory<\Database\Factories\CompanyFactory> */
     use HasFactory;
 
     /**
@@ -40,7 +40,7 @@ class Employer extends Model
     }
 
     /**
-     * Get the user that owns the employer.
+     * Get the user that owns the company.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -50,7 +50,7 @@ class Employer extends Model
     }
 
     /**
-     * Get the jobs for the employer.
+     * Get the jobs for the company.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

@@ -50,12 +50,12 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the employer associated with the user.
+     * Get the company associated with the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function employer(): HasOne
+    public function company(): HasOne
     {
-        return $this->hasOne(Employer::class);
+        return $this->hasOne(Company::class);
     }
 }

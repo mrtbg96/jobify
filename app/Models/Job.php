@@ -20,7 +20,7 @@ class Job extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'employer_id',
+        'company_id',
         'title',
         'salary',
         'location',
@@ -37,7 +37,7 @@ class Job extends Model
     protected function casts(): array
     {
         return [
-            'employer_id' => 'integer',
+            'company_id' => 'integer',
             'title' => 'string',
             'salary' => 'string',
             'location' => 'string',
@@ -47,9 +47,9 @@ class Job extends Model
         ];
     }
 
-    public function employer(): BelongsTo
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(Employer::class);
+        return $this->belongsTo(Company::class);
     }
 
     public function tag(string $name): void
