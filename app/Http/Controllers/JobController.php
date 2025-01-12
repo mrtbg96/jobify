@@ -30,6 +30,7 @@ class JobController extends Controller
 
         $jobs = Job::query()
             ->with(['company', 'tags'])
+            ->where('featured', false)
             ->latest()
             ->get();
 

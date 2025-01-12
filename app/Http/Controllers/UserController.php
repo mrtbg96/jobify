@@ -20,7 +20,7 @@ class UserController extends Controller
             ->get();
 
         return view('users.index', [
-            'users' => $users
+            'users' => $users ?? []
         ]);
     }
 

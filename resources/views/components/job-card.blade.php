@@ -3,7 +3,9 @@
 <x-card>
     <div class="flex justify-between items-center text-md font-bold">
         <div>
-            {{ $job->company->name }}
+            <div class="text-gray-400 group-hover:text-white transition-colors duration-300">
+                {{ $job->company->name }}
+            </div>
         </div>
         <div>
             <span
@@ -34,6 +36,8 @@
             @endforeach
         </div>
 
-        <x-company-logo :company="$job->company" :width="48" />
+        <a href="{{ route('companies.index') }}">
+            <x-company-logo :company="$job->company" :width="48" />
+        </a>
     </div>
 </x-card>

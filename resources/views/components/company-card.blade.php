@@ -3,13 +3,13 @@
 <div class="flex justify-between">
     <div class="flex space-x-6">
         <div>
-            <img src="{{ asset($company->logo) }}" alt="{{ $company->name }}" class="rounded-lg" width="96">
+            <x-company-logo :company="$company" width="96" />
         </div>
         <div class="flex flex-col justify-between">
             <h1 class="font-bold text-2xl group-hover:text-blue-600 transition-colors duration-300">
                 {{ $company->name }}
             </h1>
-            <p class="font-bold mt-auto text-md text-white/50">
+            <p class="font-bold mt-auto text-md text-white/50 group-hover:text-white transition-colors duration-300">
                 {{ $company->user->name }}
             </p>
         </div>

@@ -1,9 +1,9 @@
 @props(['user'])
 
-<div class="flex flex-col justify-between items-center space-y-6">
+<div class="flex flex-col justify-between items-center space-y-6 group">
     <div>
-        <img src="{{ Vite::asset('resources/images/avatar.webp') }}" alt="{{ $user->name }}" class="rounded-50"
-            width="112">
+        <img src="{{ Vite::asset('resources/images/avatar.webp') }}" alt="{{ $user->name }}"
+            class="rounded-50 group-hover:scale-105 transition-transform duration-300" width="112">
     </div>
     <div class="font-bold text-center">
         <h2 class="text-xl group-hover:text-blue-600 transition-colors duration-300">

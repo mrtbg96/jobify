@@ -2,13 +2,15 @@
 
 <x-card class="flex gap-x-6">
     <div>
-        <x-company-logo :company="$job->company" />
+        <a href="{{ route('companies.index') }}">
+            <x-company-logo :company="$job->company" />
+        </a>
     </div>
 
     <div class="flex flex-col flex-1">
-        <a href="#" class="text-md text-gray-400">
+        <div class="text-md text-gray-400 group-hover:text-white transition-colors duration-300">
             {{ $job->company->name }}
-        </a>
+        </div>
 
         <h3 class="font-bold text-xl mt-3 group-hover:text-blue-600 transition-colors duration-300">
             <a href="{{ $job->url }}" target="_blank">
