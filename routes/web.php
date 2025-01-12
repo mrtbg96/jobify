@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\SessionController;
@@ -28,7 +29,11 @@ Route::post('/jobs', [JobController::class, 'store'])
     ->name('jobs.store')
     ->middleware('auth');
 
-Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
+Route::get('/companies', [CompanyController::class, 'index'])
+    ->name('companies.index');
+
+Route::get('/users', [UserController::class, 'index'])
+    ->name('users.index');
 
 Route::middleware('guest')->group( function () {
     Route::get('/login', [SessionController::class, 'create'])
