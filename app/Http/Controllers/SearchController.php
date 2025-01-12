@@ -26,7 +26,9 @@ class SearchController extends Controller
             ->get();
 
         return view('result', [
-            'jobs' => $jobs
+            'result' => $request->search,
+            'jobs' => $jobs,
+            'count' => $jobs->count()
         ]);
     }
 }

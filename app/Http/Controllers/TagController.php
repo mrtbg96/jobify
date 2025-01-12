@@ -12,7 +12,9 @@ class TagController extends Controller
     public function __invoke(Tag $tag)
     {
         return view('result', [
-            'jobs' => $tag->jobs
+            'result' => $tag->name,
+            'jobs' => $tag->jobs,
+            'count' => $tag->jobs->count()
         ]);
     }
 }

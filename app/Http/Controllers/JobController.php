@@ -34,10 +34,14 @@ class JobController extends Controller
             ->latest()
             ->get();
 
+        $tags = Tag::query()
+            ->orderBy('name')
+            ->get();
+
         return view('jobs.index', [
             'featuredJobs' => $featuredJobs ?? [],
             'jobs' => $jobs ?? [],
-            'tags' => Tag::all()
+            'tags' => $tags ?? []
         ]);
     }
 
