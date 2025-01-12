@@ -12,7 +12,7 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
-<body class="bg-black text-white font-hanken-grotesk">
+<body class="bg-black text-white font-hanken-grotesk pb-16">
 
     <div class="px-12">
         <nav class="flex justify-between items-center py-4 border-b border-white/10">
@@ -23,14 +23,40 @@
             </div>
 
             <div class="space-x-6 font-bold">
-                <a href="/jobs">Jobs</a>
-                <a href="/career">Career</a>
-                <a href="/salaries">Salaries</a>
-                <a href="/companies">Companies</a>
+                <a href="{{ route('jobs.index') }}" @if (request()->is('jobs')) class="text-blue-600" @endif>
+                    Jobs
+                </a>
             </div>
 
             <div>
-                <a href="/">Post a Job</a>
+                @auth()
+                    <div class="flex items-center space-x-4 font-bold">
+                        <a href="{{ route('jobs.create') }}"
+                            class="bg-white text-black rounded-lg border border-white hover:bg-white/85 hover:border-white/85 hover:text-black p-2 transition-colors duration-300">
+                            Post a Job
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button
+                                class="bg-blue-600 rounded-lg border border-blue-800 hover:bg-blue-700 p-2 transition-colors duration-300">
+                                Log Out
+                            </button>
+                        </form>
+                    </div>
+                @endauth
+
+                @guest()
+                    <div class="space-x-4 font-bold">
+                        <a href="{{ route('register.create') }}"
+                            class="bg-blue-600 rounded-lg border border-blue-800 hover:bg-blue-700 p-2 transition-colors duration-300">
+                            Register
+                        </a>
+                        <a href="{{ route('login.create') }}"
+                            class="bg-white text-black rounded-lg border border-white hover:bg-white/85 hover:border-white/85 hover:text-black p-2 transition-colors duration-300">
+                            Log In
+                        </a>
+                    </div>
+                @endguest
             </div>
         </nav>
 

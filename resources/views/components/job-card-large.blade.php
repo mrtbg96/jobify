@@ -2,30 +2,37 @@
 
 <x-card class="flex gap-x-6">
     <div>
-        <x-employer-logo />
+        <x-employer-logo :employer="$job->employer" />
     </div>
 
     <div class="flex flex-col flex-1">
-        <a href="#" class="text-sm text-gray-400">
+        <a href="#" class="text-md text-gray-400">
             {{ $job->employer->name }}
         </a>
 
         <h3 class="font-bold text-xl mt-3 group-hover:text-blue-600 transition-colors duration-300">
-            {{ $job->title }}
+            <a href="{{ $job->url }}" target="_blank">
+                {{ $job->title }}
+            </a>
         </h3>
 
-        <p class="text-sm text-gray-400 mt-auto">
+        <p class="text-md text-gray-400 mt-auto">
             {{ $job->schedule }}: {{ $job->salary }}
         </p>
     </div>
 
     <div class="flex flex-col justify-between">
-        <div class="flex justify-end space-x-4">
-            <span>Remote</span>
-            <span>22h</span>
+        <div class="flex justify-end items-center space-x-4 font-bold">
+            <span class="text-md group-hover:text-blue-600 transition-colors duration-300">
+                {{ $job->location }}
+            </span>
+            <span
+                class="bg-white text-black text-xs rounded-lg p-1 italic group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                {{ $job->created_at->diffForHumans() }}
+            </span>
         </div>
 
-        <div class="space-x-2">
+        <div class="space-x-2 flex justify-end">
             @foreach ($job->tags as $tag)
                 <x-tag :$tag size="small" />
             @endforeach

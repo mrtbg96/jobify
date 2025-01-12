@@ -1,16 +1,29 @@
 @props(['job'])
 
 <x-card>
-    <div class="text-sm">
-        {{ $job->employer->name }}
+    <div class="flex justify-between items-center text-md font-bold">
+        <div>
+            {{ $job->employer->name }}
+        </div>
+        <div>
+            <span
+                class="bg-white text-black text-sm rounded-lg p-1 italic group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                {{ $job->created_at->diffForHumans() }}
+            </span>
+        </div>
     </div>
 
-    <div class="py-8">
-        <h3 class="mb-1 text-center font-bold group-hover:text-blue-600 transition-colors duration-300">
-            {{ $job->title }}
+    <div class="py-8 font-bold">
+        <h3 class="mb-1 text-lg text-center group-hover:text-blue-600 transition-colors duration-300">
+            <a href="{{ $job->url }}" target="_blank">
+                {{ $job->title }}
+            </a>
         </h3>
-        <p class="text-center text-sm mt-4">
+        <p class="text-center text-md mt-4">
             {{ $job->schedule }}: {{ $job->salary }}
+        </p>
+        <p class="text-center text-md group-hover:text-blue-600 mt-4">
+            {{ $job->location }}
         </p>
     </div>
 
@@ -21,6 +34,6 @@
             @endforeach
         </div>
 
-        <x-employer-logo :width="42" />
+        <x-employer-logo :employer="$job->employer" :width="48" />
     </div>
 </x-card>

@@ -7,13 +7,10 @@
                     Let's Find Your Next Job
                 </h1>
 
-                <form action="#" method="POST" autocomplete="off" class="w-1/2 flex flex-col items-center">
-                    @csrf
-
-                    <input type="text" name="search" id="search" placeholder="Software Engineer..."
-                        class="bg-white/5 border border-white/10 w-full p-4 rounded-xl focus:outline-none focus:border-blue-600"
-                        required>
-                </form>
+                <x-forms.form action="{{ route('search') }}" autocomplete="off" class="w-full">
+                    <x-forms.input :label="false" name="search"
+                        placeholder="Web Developer, San Fransisco, Full-time..." />
+                </x-forms.form>
             </div>
         </section>
 
@@ -21,19 +18,27 @@
             <x-section-heading>Featured Jobs</x-section-heading>
 
             <div class="grid lg:grid-cols-3 gap-8 mt-6">
-                @foreach ($featuredJobs as $job)
+                @forelse ($featuredJobs as $job)
                     <x-job-card :$job />
-                @endforeach
+                @empty
+                    <p class="pl-6 font-bold italic text-blue-600">
+                        No featured jobs were found!
+                    </p>
+                @endforelse
             </div>
         </section>
 
         <section>
             <x-section-heading>Tags</x-section-heading>
 
-            <div class="mt-6 flex space-x-2">
-                @foreach ($tags as $tag)
-                    <x-tag :$tag />
-                @endforeach
+            <div class="flex flex-wrap mt-6 space-x-2">
+                @forelse ($tags as $tag)
+                    <x-tag :$tag section="true" />
+                @empty
+                    <p class="pl-6 font-bold italic text-blue-600">
+                        No tags were found!
+                    </p>
+                @endforelse
             </div>
         </section>
 
@@ -41,9 +46,13 @@
             <x-section-heading>Recent Jobs</x-section-heading>
 
             <div class="mt-6 space-y-6">
-                @foreach ($jobs as $job)
+                @forelse ($jobs as $job)
                     <x-job-card-large :$job />
-                @endforeach
+                @empty
+                    <p class="pl-6 font-bold italic text-blue-600">
+                        No recent jobs were found!
+                    </p>
+                @endforelse
             </div>
         </section>
     </div>

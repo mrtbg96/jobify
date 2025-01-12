@@ -7,6 +7,12 @@ use App\Models\Tag;
 
 use Illuminate\View\View;
 
+use Illuminate\Support\Arr;
+
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Http\RedirectResponse;
+
 use App\Http\Requests\StoreJobRequest;
 use App\Http\Requests\UpdateJobRequest;
 
@@ -17,11 +23,20 @@ class JobController extends Controller
      */
     public function index(): View
     {
-        $jobs =  Job::all()->groupBy('featured');
+        $featuredJobs = Job::query()
+            ->with(['employer', 'tags'])
+            ->where('featured', true)
+            ->latest()
+            ->get();
+
+        $jobs = Job::query()
+            ->with(['employer', 'tags'])
+            ->latest()
+            ->get();
 
         return view('jobs.index', [
-            'featuredJobs' => $jobs[1],
-            'jobs' => $jobs[0],
+            'featuredJobs' => $featuredJobs ?? [],
+            'jobs' => $jobs ?? [],
             'tags' => Tag::all()
         ]);
     }
@@ -29,17 +44,56 @@ class JobController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('jobs.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJobRequest $request)
+    public function store(StoreJobRequest $request): RedirectResponse
     {
-        //
+        $attributes = $request->validate([
+            'title' => [
+                'required',
+                'string',
+                'min:4',
+                'max:64',
+                'unique:jobs'
+            ],
+            'salary' => [
+                'required',
+                'string'
+            ],
+            'location' => [
+                'required',
+                'string'
+            ],
+            'schedule' => [
+                'required',
+                'in:Full-time,Part-time'
+            ],
+            'url' => [
+                'required',
+                'url'
+            ],
+            'tags' => [
+                'required',
+                'string'
+            ],
+        ]);
+
+
+        $attributes['featured'] = $request->has('featured');
+
+        $job = Auth::user()->employer->jobs()->create(Arr::except($attributes, 'tags'));
+
+        foreach (explode(',', $attributes['tags']) as $tag) {
+            $job->tag(strtolower(trim($tag)));
+        }
+
+        return redirect()->route('jobs.index');
     }
 
     /**
