@@ -27,6 +27,9 @@
                 <a href="{{ route('jobs.index') }}" @if (request()->is('jobs')) class="text-blue-600" @endif>
                     Jobs
                 </a>
+                <a href="{{ route('companies.index') }}" @if (request()->is('companies')) class="text-blue-600" @endif>
+                    Companies
+                </a>
             </div>
 
             <div>

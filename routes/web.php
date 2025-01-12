@@ -1,10 +1,12 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisteredUserController;
 
@@ -25,6 +27,8 @@ Route::get('/jobs/create', [JobController::class, 'create'])
 Route::post('/jobs', [JobController::class, 'store'])
     ->name('jobs.store')
     ->middleware('auth');
+
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 
 Route::middleware('guest')->group( function () {
     Route::get('/login', [SessionController::class, 'create'])
