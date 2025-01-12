@@ -10,7 +10,7 @@
 
             <div class="mt-6 space-y-6">
                 @forelse ($jobs as $job)
-                    <x-job-card-large :$job :featured="$job->featured" />
+                    <x-job-card-large :$job />
                 @empty
                     <p class="mt-6 pl-6 font-bold text-md italic">
                         No jobs were found!
